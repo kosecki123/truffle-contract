@@ -70,10 +70,10 @@ var contract = (function(module) {
 
         var argTopics = logABI.anonymous ? copy.topics : copy.topics.slice(1);
         var indexedData = "0x" + argTopics.map(function (topics) { return topics.slice(2); }).join("");
-        var indexedParams = ethJSABI.decodeEvent(partialABI(logABI, true), indexedData);
+        var indexedParams = ethJSABI.decodeEvent(partialABI(logABI, true), indexedData, log.topics);
 
         var notIndexedData = copy.data;
-        var notIndexedParams = ethJSABI.decodeEvent(partialABI(logABI, false), notIndexedData);
+        var notIndexedParams = ethJSABI.decodeEvent(partialABI(logABI, false), notIndexedData, log.topics);
 
         copy.event = logABI.name;
 
